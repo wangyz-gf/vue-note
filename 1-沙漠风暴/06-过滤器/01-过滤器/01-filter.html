@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>fetch</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<script type="text/javascript" src="lib/vue.js"></script>
+<script src="lib/axios.js"></script>
+</head>
+<body>
+    <div id="box">
+        <button @click="handleClick()">axios</button>     
+        
+        <ul>
+            <li v-for="item in datalist" :key="item.id">
+                <img :src=" item.img |  kerwinfilter"/>
+                <h3>{{item.nm}}</h3>
+                <p>{{item.showInfo}}</p>
+            </li>
+        </ul>
+
+        <div>{{ 'myname' | uppercase | sub }}</div>
+    </div>
+    <script type="text/javascript">
+        
+        Vue.filter("kerwinfilter",function(path){
+            return path.replace('w.h','')+'@1l_1e_1c_128w_180h'
+        })
+
+
+        Vue.filter("uppercase",function(str){
+            return str.toUpperCase()
+        })
+
+        Vue.filter("sub",function(str){
+            return str.substring(0,2)
+        })  
+
+        new Vue({
+            el:"#box",
+            data:{
+              datalist:[]
+            },
+            methods: {
+                handleClick(){
+                    axios.get("test.json").then(res=>{
+                        // console.log(res.data.movieList)
+                        this.datalist=  res.data.movieList
+                    })
+                }
+            }    
+        })
+
+        /*
+            axios.post("*****", "name=kerwin&age=100").then(res=>{})
+        
+            axios.post("****",{
+                name:"kerwin",
+                age:100
+            }).then(res=>{})
+
+            //axios 带cookie
+        */
+    </script>
+</body>
+</html>
+
+<!-- 
+http://p0.meituan.net/w.h/moviemachine/40d1e5ac176f1e9258da10a3222dbff7952117.png
+
+https://p0.meituan.net/moviemachine/40d1e5ac176f1e9258da10a3222dbff7952117.png@1l_1e_1c_128w_180h -->

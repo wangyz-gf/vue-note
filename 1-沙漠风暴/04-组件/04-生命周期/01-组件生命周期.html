@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+
+<script type="text/javascript" src="lib/vue.js"></script>
+</head>
+<body>
+    <div id="box">
+      {{myname}}
+      <button @click="handleClick">click</button>
+
+      <child v-if="isCreated"></child>
+    </div>
+
+    <script type="text/javascript">
+  
+      Vue.component("child",{
+        template:`
+          <div>child</div>
+        `,
+        mounted(){
+          window.onresize = function(){
+            console.log("resize-1111111")
+          }
+        },
+        destroyed(){
+          window.onresize = null
+        }
+      })
+
+     
+      //创建根组件(每个组件都有8个生命周期, 如果需要 ,自己用)
+      var vm = new Vue({
+        el: "#box",
+        data:{
+          myname:"kerwin",
+          isCreated:true
+        },
+
+        methods: {
+          handleClick(){
+            this.myname = "xiaoming"
+            //状态修改之后， 异步更新dom
+
+            var obox = document.getElementById("box")
+            console.log("11111111",obox.innerHTML)
+          }
+        },
+        beforeCreate() {
+          console.log("beforeCreate",this.myname)
+        },
+        created() {
+          this.myname ="1111111111"+this.myname
+          console.log("created","初始化工作",this.myname)
+        },
+
+        beforeMount() {
+          this.myname="2222222222"+this.myname
+          console.log("beforeMount","dom挂载之前得,无法访问dom","自己在服务端渲染，这个函数会在客户端和服务端各自触发一次")
+        },
+        mounted() {
+          console.log("mounted","dom挂载完成了,访问dom-swiper,","监听事件,ajax,设置定时器")
+        },
+
+        beforeUpdate() {
+          console.log("beforeUpdate")
+        },
+
+        updated(){
+          console.log("updated","获取到更新后得dom,依赖于dom操作的库，需要知道状态更新完，什么时候dom更新。")
+          var obox = document.getElementById("box")
+            console.log("22222222222",obox.innerHTML)
+        },
+        beforeDestroy() {
+          console.log("beforeDestroy")
+        },
+        destroyed() {
+          console.log("destroyed-取消定时器，window事件进行解绑操作")
+        }
+      })
+
+     //  vue组件 生命周期 ?
+     //  vue组件的 钩子函数？
+     //  vue组件的生命周期钩子函数？
+    </script>
+</body>
+</html>

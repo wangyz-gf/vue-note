@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Examples</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link href="" rel="stylesheet">
+
+  <script type="text/javascript" src="lib/vue.js"></script>
+  <link rel="stylesheet" href="lib/swiper/css/swiper.css">
+  <script src="lib/swiper/js/swiper.js"></script>
+  <style>
+    .swiper-container {
+      width: 600px;
+      height: 300px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box">
+    <div class="swiper-container kerwin">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" v-for="data in datalist">
+          {{data}}
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+  
+    var vm = new Vue({
+      el: "#box",
+      data: {
+        datalist: [],
+      },
+      mounted() {
+        setTimeout(()=>{
+           this.datalist = ["aaaa","bbbbb","ccccc"]
+
+           //状态立即被改变， dom异步更新
+           console.log("mouted",document.querySelectorAll(".swiper-slide").length)
+
+        },2000)
+      },
+
+      updated() {
+        console.log("updated",document.querySelectorAll(".swiper-slide").length)
+        new Swiper(".kerwin",{
+              loop:true,
+              // direction:"vertical",
+              navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+              },
+              pagination: {
+                el: '.swiper-pagination',
+              },
+            })
+      },
+    })
+  </script>
+</body>
+
+</html>

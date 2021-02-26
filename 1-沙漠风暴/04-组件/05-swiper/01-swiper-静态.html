@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+
+<link rel="stylesheet" href="lib/swiper/css/swiper.css">
+<script src="lib/swiper/js/swiper.js"></script>
+
+<style>
+	.kerwin {
+	    width: 600px;
+      height: 300px;
+      background: yellow;
+	}  
+</style>
+</head>
+<body>
+  
+  <div class="swiper-container kerwin">
+      <div class="swiper-wrapper">
+          <div class="swiper-slide">Slide 1111111111</div>
+          <div class="swiper-slide">Slide 2222222222</div>
+          <div class="swiper-slide">Slide 3333333333</div>
+      </div>
+
+          <!-- Add Arrows -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+
+      <div class="swiper-pagination"></div>
+  </div>
+
+  <script>
+      new Swiper(".kerwin",{
+        loop:true,
+        // direction:"vertical",
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+          el: '.swiper-pagination',
+        },
+      })
+  </script>
+</body>
+</html>

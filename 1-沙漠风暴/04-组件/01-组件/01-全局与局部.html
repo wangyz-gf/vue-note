@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <kerwin-navbar>
+        </kerwin-navbar>
+
+        <kerwin-tabbar></kerwin-tabbar>
+    </div>
+    <script>
+        // 1. 起名字 ：js驼峰， html 链接符-
+        // 2. dom片段 没有代码提示 没有高亮显示 - vue单文件组件解决
+        // 3. css 只能写成 行内。- vue单文件组件解决
+        // 4. template 包含一个根节点
+        // 5. 组件是孤岛,无法【直接】访问外面的组件的状态或者方法。- 间接的组件通信来交流。     
+        // 6. 自定义的组件 data 必须是一个函数， 
+        // 7. 所有的组件都在一起， 太乱了  --- vue单文件组件解决
+        Vue.component("kerwinNavbar",{
+            template:`
+            <div style="background:yellow;">
+                <button @click="handleBack()">返回</button>
+                <span>导航栏--{{myname}}</span>
+                <button @click="handleHome()">首页</button>
+
+                <child></child>
+
+                <tabbarchild></tabbarchild>
+            </div>
+            `,//模板
+            methods: {
+                handleBack(){
+                    console.log("返回按钮")
+                },
+                handleHome(){
+                    console.log("homeclick")
+                }
+            },
+            computed: {
+                
+            },
+            watch: {
+                
+            },
+
+            data(){
+                return {
+                    myname:"child-name"
+                }
+            }
+        })
+        //全局组件定义方式。
+
+
+        Vue.component("kerwinTabbar",{
+            template:`
+                <div style="background:red">
+                    tabbbar  
+                    <child></child>  
+                    <tabbarchild></tabbarchild>
+                </div>
+            `,
+            components:{
+                //局部定义
+                "tabbarchild":{
+                    template:`<div>tabbarchild</div>`
+                }
+            }
+        })
+
+
+        // 定义一个孩子组件
+        Vue.component("child",{
+            template:`
+                <div>child</div>
+            `
+        })
+
+        // 根组件
+        new Vue({
+            el:"#box",
+            data:{
+                myname:"kerwin"
+            }          
+        })
+    
+    </script>
+</body>
+</html>

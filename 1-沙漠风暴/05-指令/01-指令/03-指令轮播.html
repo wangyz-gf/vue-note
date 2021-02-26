@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Examples</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link href="" rel="stylesheet">
+
+  <script type="text/javascript" src="lib/vue.js"></script>
+  <link rel="stylesheet" href="lib/swiper/css/swiper.css">
+  <script src="lib/swiper/js/swiper.js"></script>
+  <style>
+    .swiper-container {
+      width: 600px;
+      height: 300px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box">
+    <div class="swiper-container kerwin">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" v-for="(data,index) in datalist" v-swiper="{
+            current:index,
+            length:datalist.length
+          }">
+            {{data}}
+          </div>
+        </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    //vnode 虚拟节点
+
+
+    Vue.directive("swiper",{
+      inserted(el,binding,vnode){
+        console.log(vnode.context.datalist.length)  
+
+        if(binding.value.current=== binding.value.length-1){
+          new Swiper(".kerwin",{
+                loop:true,
+                pagination: {
+                  el: '.swiper-pagination',
+                },
+          })
+        }
+      }
+    })
+
+    var vm = new Vue({
+      el: "#box",
+      data: {
+        datalist: [],
+        // myswiper:null
+      },
+      mounted() {
+        setTimeout(()=>{
+          this.datalist = ["11111","2222222","333333","55555","666666"]
+
+          //状态同步更新， dom异步更新
+        
+        },2000)
+      }
+    })
+  </script>
+
+</body>
+</html>

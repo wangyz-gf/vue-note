@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<!-- <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"> -->
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+
+<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+
+	body{
+		height: 3000px;
+	}
+
+	*{
+		touch-action: manipulation;
+	}
+</style>
+<!-- <script type="text/javascript" src="lib/fastclick.js"></script> 
+<script type="text/javascript" >
+	if ('addEventListener' in document) {
+	document.addEventListener('DOMContentLoaded', function() {
+		FastClick.attach(document.body);
+	}, false);
+}
+</script>  -->
+</head>
+<body>
+    <div class="box">
+		<button ontouchstart="handleStart()"  onclick="handleClick()">click1111111</button>    	
+    </div>
+
+    <script type="text/javascript">
+    	function handleStart(){
+				console.log("touchstart",Date.now());
+				// console.log("跳转页面")
+				//TODO dwadwa
+    	}
+
+    	function handleClick(){
+				console.log("click",Date.now());
+				//FIXME dwadwa
+		}
+		
+		// touchstart,touchmove, touchend,touchcancel
+    </script>
+</body>
+</html>
+

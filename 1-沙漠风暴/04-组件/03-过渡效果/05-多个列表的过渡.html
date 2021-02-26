@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="lib/vue.js"></script>
+
+    <style>
+         .kerwin-enter-active {
+          animation: aaa .5s;
+        }
+
+        .kerwin-leave-active {
+          animation: aaa .5s reverse;
+        }
+
+        @keyframes aaa {
+          0% {
+            opacity: 0;
+            transform: translateX(100px);
+          }
+
+          100% {
+            opacity: 1;
+            transform: translateX(0px);
+          }
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <!-- oinput.oninput -->
+        <!-- 事件中， 不加（） ，得到事件对象 -->
+        <!-- <input type="text" @input="handleInput"/> -->
+
+        <!-- 双向绑定的指令 -->
+        <input type="text" v-model="mytext"/>
+        <button @click="handleClick()">add</button>
+
+        <!-- <transition> -->
+        <!-- <div v-if="datalist.length===0">代办事项空空</div> -->
+        <!-- <ul > -->
+          <transition-group  name="kerwin" tag="ul" >
+            <li v-for="(data,index) in datalist" :key="data">
+                {{data}}
+                <button @click="handleDel(index)">del</button>
+            </li>
+          </transition-group>
+        <!-- </ul> -->
+    </div>
+
+    <script>
+
+        var vm = new Vue({
+            el:"#box",
+            data:{
+                mytext:"",
+                datalist:[]
+            },
+            methods: {
+                handleClick(){
+                    console.log("add",this.mytext)
+                    this.datalist.push(this.mytext)
+
+                    //重置input
+                    this.mytext=""
+                },
+                handleDel(myindex){
+                    console.log("del",myindex)
+                    this.datalist.splice(myindex,1)
+                }
+                // handleInput(evt){
+                //     // console.log("input",evt.target.value)
+                //     this.mytext = evt.target.value
+
+                // }
+            },
+        })
+    </script>
+</body>
+</html>

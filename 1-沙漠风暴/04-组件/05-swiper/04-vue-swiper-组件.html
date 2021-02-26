@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Examples</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link href="" rel="stylesheet">
+
+  <script type="text/javascript" src="lib/vue.js"></script>
+  <link rel="stylesheet" href="lib/swiper/css/swiper.css">
+  <script src="lib/swiper/js/swiper.js"></script>
+  <style>
+    .swiper-container {
+      width: 600px;
+      height: 300px;
+    }
+    .swiper-container img{
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box">
+    <!-- <swiper>
+      <div class="swiper-slide">
+        <img src="https://pic.maizuo.com/usr/movie/57cb9b5889ea70e6ec5da639e1452583.jpg?x-oss-process=image/quality,Q_70"/>
+      </div>
+      <div class="swiper-slide">
+        <img src="https://pic.maizuo.com/usr/movie/cb67c23e8e9124cfb44e222297907b0e.jpg?x-oss-process=image/quality,Q_70"/>
+      </div>
+      <div class="swiper-slide">
+        <img src="https://pic.maizuo.com/usr/movie/6655766a79fd9ac6b41715cf9a1f3aad.jpg?x-oss-process=image/quality,Q_70"/>
+      </div>
+    </swiper> -->
+
+    <!-- <swiper :key="datalist.length">
+      <div class="swiper-slide" v-for="data in datalist">
+        {{data}}
+      </div>
+    </swiper> -->
+
+    
+
+    <swiper v-if="datalist.length" :myoptions="{
+      loop:true,
+      direction:'vertical'
+    }">
+      <div class="swiper-slide" v-for="data in datalist">
+        {{data}}
+      </div>
+
+      <template #pagination>
+        <div class="swiper-pagination"></div>
+      </template>
+    </swiper>
+
+  </div>
+
+  <script type="text/javascript">
+    Vue.component("swiper",{
+      props:["myoptions"],
+      template:`
+      <div class="swiper-container kerwin">
+        <div class="swiper-wrapper">
+          <slot></slot>
+        </div>
+        <slot name="pagination"></slot>
+      </div>
+      `,
+
+      mounted(){
+        console.log("mounted",this.myoptions)
+
+        var baseoptions = {
+              loop:false,
+              pagination: {
+                el: '.swiper-pagination',
+              },
+        }
+        new Swiper(".kerwin",Object.assign(baseoptions,this.myoptions))
+      },
+      destroyed() {
+        console.log("destroyed")
+      },
+    })
+
+    var vm = new Vue({
+      el: "#box",
+      data: {
+        datalist: [],
+      },
+      mounted() {
+        setTimeout(()=>{
+           this.datalist = ["aaaa","bbbbb","ccccc"]
+        },2000)
+      }
+
+    })
+  </script>
+</body>
+
+</html>

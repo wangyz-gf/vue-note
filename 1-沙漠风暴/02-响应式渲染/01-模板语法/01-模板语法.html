@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="lib/vue.js"></script>
+
+  <style>
+    .red{
+      background:red;
+    }
+
+    .yellow{
+      background:yellow;
+    }
+  </style>
+</head>
+<body>
+  
+  <div id="box">
+    {{myname}}
+    <button @click="handleClick()">change1</button>
+    <!-- 指令 绑定事件的 指令 -->
+    <button v-on:click="handleClick()">change2</button>
+
+    <!-- 指令 v-show -->
+    <div v-show=" isShow===true ">我是动态的隐藏和显示</div>
+    <!-- 指令 v-if 条件 -->
+    <div v-if="isCreated">我是动态创建和删除</div>
+
+    <!-- 指令 v-bind 动态绑定,class, style,src, alt, -->
+    <div v-bind:class=" isActive?'red':'yellow' ">动态切换背景色-1</div>
+    <div :class=" isActive?'red':'yellow' ">动态切换背景色-2</div>
+
+    <!-- 指令 v-for 遍历 数组的指令 -->
+    <ul>
+      <li v-for="(item,index) in datalist">
+        {{item}}------{{index}}
+      </li>
+    </ul>
+  </div>
+  <script>
+    var vm = new Vue({
+      el:"#box",
+      data:{
+        myname:"kerwin", //状态
+        isShow:true,
+        isCreated:true,
+        isActive:true,
+        datalist:["aaaa","bbbbb","cccc","dddd","eeeee"]
+      },
+      methods: {
+        handleClick(){
+          console.log("handleCLick")
+          this.myname = "xiaoming"
+          this.isShow = !this.isShow
+          this.isCreated = !this.isCreated
+          this.isActive = !this.isActive
+        }
+      },
+    })
+
+  </script>
+</body>
+</html>

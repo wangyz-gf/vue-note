@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+
+<link rel="stylesheet" href="lib/swiper/css/swiper.css">
+<script src="lib/swiper/js/swiper.js"></script>
+
+<style>
+	.kerwin {
+	    width: 600px;
+      height: 300px;
+      background: yellow;
+	}  
+</style>
+</head>
+<body>
+  
+  <div class="swiper-container kerwin">
+      <div class="swiper-wrapper">
+         
+      </div>
+
+          <!-- Add Arrows -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+
+      <div class="swiper-pagination"></div>
+  </div>
+
+  <script>
+      //模拟ajax
+      setTimeout(()=>{
+        var list=  ["aaaa","bbbb","cccc"]
+
+        var newlist = list.map(item=>`<div class="swiper-slide">${item}</div>`)
+
+        var owraper = document.querySelector(".swiper-wrapper")
+        owraper.innerHTML = newlist.join("")
+        // console.log(newlist)
+
+        //初始化
+        new Swiper(".kerwin",{
+          loop:true,
+          // direction:"vertical",
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+          pagination: {
+            el: '.swiper-pagination',
+          },
+        })
+
+      },2000)
+
+      //swiper  初始化过早
+  </script>
+</body>
+</html>

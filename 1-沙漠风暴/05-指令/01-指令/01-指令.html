@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<script type="text/javascript" src="lib/vue.js"></script>
+</head>
+<body>
+    <div id="box">
+      <div v-hello="  'red'  ">1111111111111111111111</div>
+      <div v-hello=" 'blue'  ">2222222222222222222222</div>
+      <div v-hello=" 'yellow' ">3333333333333333333333</div>
+
+      <div v-hello="mycolor">55555555555555</div>
+    </div>	
+
+    <script type="text/javascript">
+      // v-kerwin  v-swiper
+      // 手动操作dom时候， 就可以使用指令封装，
+      // 复用v-swiper
+
+      Vue.directive("hello",{
+        //指令的生命周期-1
+        inserted(el,binding){
+          console.log("绑定当前指令的标签插入父节点就会执行",binding.value)
+          el.style.background=binding.value
+        },
+
+        update(el,binding){
+          // console.log("")
+          el.style.background=binding.value
+        }
+      })
+
+      var vm = new Vue({
+        el:"#box",
+        data:{
+          mycolor:"red"
+        }
+      })
+       
+    </script>
+</body>
+</html>
